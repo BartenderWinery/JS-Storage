@@ -1,10 +1,17 @@
 ## [Cookie.js](https://github.com/BartenderWinery/JS-Storage/blob/main/cookies.js)
 ```javascript
-var _cookies=Object.fromEntries(decodeURIComponent(document.cookie).split("; ").map((m)=>{m=m.split("=");return[m[0],m[1]]}))
+var _cookies=document.cookie?Object.fromEntries(decodeURIComponent(document.cookie).split("; ").map((m)=>{m=m.split("=");return[m[0],m[1]]})):{}
 var Cookies={
-    set:function(k,v){return _cookies[k]=v},
+    set:function(k,v){
+        _cookies[k]=v
+        this.update()},
     get:function(k){return _cookies[k]},
-    remove:function(k){return delete _cookies["CONSENT"]}}
+    remove:function(k){
+        delete _cookies[k]
+        this.update()},
+    update:function(){
+        document.cookie.split(";").forEach(function(c){document.cookie=c.replace(/^ +/,"").replace(/=.*/,"=;expires="+new Date().toUTCString()+";path=/")});
+        for(var i=0;i<keys(_cookies).length;i++){document.cookie+=keys(_cookies)[i]+"="+_cookies[keys(_cookies)[i]]+"; "}}}
 ```
 An extremely elegant, simple, and fast API for cookies. This is a minimal implication of the widely known [js-cookie](https://github.com/js-cookie/js-cookie) for any of uses.
 ### How do you use it?
