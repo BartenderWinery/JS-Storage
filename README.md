@@ -11,7 +11,7 @@ var Cookies={
         this.update()},
     update:function(){
         document.cookie.split(";").forEach(function(c){document.cookie=c.replace(/^ +/,"").replace(/=.*/,"=;expires="+new Date().toUTCString()+";path=/")});
-        for(var i=0;i<keys(_cookies).length;i++){document.cookie+=keys(_cookies)[i]+"="+_cookies[keys(_cookies)[i]]+"; "}}}
+        try{for(var i=0;i<keys(_cookies).length;i++){document.cookie+=keys(_cookies)[i]+"="+_cookies[keys(_cookies)[i]]+"; "}}catch(e){}}}
 ```
 An extremely elegant, simple, and fast API for cookies. This is a minimal implication of the widely known [js-cookie](https://github.com/js-cookie/js-cookie) for any of uses.
 ### How do you use it?
