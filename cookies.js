@@ -1,12 +1,12 @@
 var _cookies=document.cookie?Object.fromEntries(decodeURIComponent(document.cookie).split("; ").map((m)=>{m=m.split("=");return[m[0],m[1]]})):{}
 var Cookies={
     set:function(k,v){
-        _cookies[k]=v
-        this.update()},
-    get:function(k){return _cookies[k]},
+        document.cookie=k+"="+encodeURIComponent(typeof(v)!="object"?v:JSON.stringify(v))
+        return _cookies[k]=v},
+    get:function(k){
+        return _cookies[k]},
+    parse:function(k){
+        return JSON.parse(this.get(k))},
     remove:function(k){
-        delete _cookies[k]
-        this.update()},
-    update:function(){
-        document.cookie.split(";").forEach(function(c){document.cookie=c.replace(/^ +/,"").replace(/=.*/,"=;expires="+new Date().toUTCString()+";path=/")});
-        try{for(var i=0;i<keys(_cookies).length;i++){document.cookie+=keys(_cookies)[i]+"="+_cookies[keys(_cookies)[i]]+"; "}}catch(e){}}}
+        document.cookie=k+"=; expires=Thu, 18 Dec 2013 12:00:00 UTC"
+        delete _cookies[k]}}
