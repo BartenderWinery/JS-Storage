@@ -9,4 +9,4 @@ var Cookies={
         this.update()},
     update:function(){
         document.cookie.split(";").forEach(function(c){document.cookie=c.replace(/^ +/,"").replace(/=.*/,"=;expires="+new Date().toUTCString()+";path=/")});
-        for(var i=0;i<keys(_cookies).length;i++){var c=this.get(keys(_cookies)[i]);document.cookie+=keys(_cookies)[i]+"="+typeof(c)=="string"?c:JSON.stringify(c)+"; "}}}
+        for(var i=0;i<keys(_cookies).length;i++){document.cookie+=keys(_cookies)[i]+"="+_cookies[keys(_cookies)[i]]+"; "}}}
